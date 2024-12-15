@@ -130,6 +130,7 @@ namespace mastermind
         {
             attempts += 1;
             this.Title = $"Poging {attempts}";
+            // Tonen van zowel score als naam van huidige speler
             scoreLabel.Content = $"Current score: {score}\nCurrent player: {userList[currentPlayer]}";
 
             if (attempts >= maxattempts)
