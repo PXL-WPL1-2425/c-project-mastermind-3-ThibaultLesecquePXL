@@ -25,6 +25,7 @@ namespace mastermind
         string[] colorSelectionString = ["Red", "Blue", "Green", "White", "Yellow", "Orange"];
         int[] colorsRandom = new int[4];
         string[,] highscoresList = new string[15, 3];
+        List<string> userList = new List<string>();
 
         int attempts = 0;
         int maxattempts = 10;
@@ -309,14 +310,25 @@ namespace mastermind
 
         private void ContinueButton_Click(object sender, RoutedEventArgs e)
         {
-            username = usernameTextBox.Text;
-            if (username.Length > 0)
+            string tempUsername = usernameTextBox.Text;
+            if (tempUsername.Length > 0)
             {
-                usernameUIGrid.Visibility = Visibility.Hidden;
-                gameUIGrid.Visibility = Visibility.Visible;
-                ComboBoxItemsInit();
-                NewGame();
+                username = usernameTextBox.Text;
+                userList.Add(tempUsername);
+                MessageBoxResult result = MessageBox.Show($"Speler werd toegevoegd, wil je nog een speler toevoegen?", "Extra spelers toevoegen?", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.No)
+                {
+                    usernameUIGrid.Visibility = Visibility.Hidden;
+                    gameUIGrid.Visibility = Visibility.Visible;
+                    ComboBoxItemsInit();
+                    NewGame();
+                }
             }
+            else
+            {
+                MessageBox.Show("Er werd geen username ingegeven!", "Geen geldige input", MessageBoxButton.OK);
+            }
+
         }
 
         private void AmountAttemptsButton_Click(object sender, RoutedEventArgs e)
