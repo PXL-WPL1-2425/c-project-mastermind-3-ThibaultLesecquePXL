@@ -36,6 +36,9 @@
             <TextBox Name="debugTextBox" HorizontalAlignment="Center" Margin="0,285,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300" Height="50" Visibility="hidden"/>
             <Label Name="timerLabel" Content="00" HorizontalAlignment="Center" Margin="0,33,0,0" VerticalAlignment="Top" FontSize="25"/>
             <Label Name="scoreLabel" Content="Current score: 100" HorizontalAlignment="Left" Margin="50,15,0,0" VerticalAlignment="Top"/>
+            <Button Name="buyColorButton" Content="Buy color hint" HorizontalAlignment="Left" Margin="630,335,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="buyColorButton_Click"/>
+            <Button Name="buyPositionButton" Content="Buy position hint" HorizontalAlignment="Left" Margin="630,371,0,0" VerticalAlignment="Top" Width="120" Height="29" Click="buyPositionButton_Click"/>
+
         </Grid>
         <Grid Name="settingsUIGrid" Visibility="Hidden">
             <Label Content="Hoeveelheid pogingen:" HorizontalAlignment="Center" Margin="0,147,0,0" VerticalAlignment="Top"/>

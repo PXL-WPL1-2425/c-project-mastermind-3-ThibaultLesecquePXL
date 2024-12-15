@@ -45,7 +45,7 @@ namespace mastermind
         {
             for (int i = 0; i < colorsRandom.Length; i++)
             {
-                colorsRandom[i] = rnd.Next(1, 6);
+                colorsRandom[i] = rnd.Next(0, 6);
             }
 
             debugTextBox.Text = $"Oplossing: ({colorSelectionString[colorsRandom[0]]}, {colorSelectionString[colorsRandom[1]]}, {colorSelectionString[colorsRandom[2]]}, {colorSelectionString[colorsRandom[3]]})";
@@ -301,6 +301,7 @@ namespace mastermind
             settingsUIGrid.Visibility = Visibility.Hidden;
             gameUIGrid.Visibility = Visibility.Hidden;
             usernameUIGrid.Visibility = Visibility.Visible;
+            isPlaying = false;
             this.Title = "Mastermind";
             userList.Clear();
         }
@@ -378,6 +379,45 @@ namespace mastermind
             else
             {
                 MessageBox.Show($"De ingevoerde waarde moet een getal zijn!", "Instellingen", MessageBoxButton.OK);
+            }
+        }
+
+        private void buyColorButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Het kopen van een hint voor een juiste kleur kost 15 strafpunten. Weet je zeker dat je verder wilt gaan?", "Hint kopen", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                if (score >= 15)
+                {
+                    score -= 15;
+                    string tempColor = colorSelectionString[colorsRandom[rnd.Next(0, 4)]];
+                    MessageBox.Show($"De kleur {tempColor} komt voor in de code!", "Hint gekocht", MessageBoxButton.OK);
+                    scoreLabel.Content = $"Current score: {score}\nCurrent player: {userList[currentPlayer]}";
+                }
+                else
+                {
+                    MessageBox.Show("Je hebt niet genoeg scorepunten om een hint te kopen!", "Hint kopen", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+        }
+
+        private void buyPositionButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Het kopen van een hint voor een juiste kleur kost 25 strafpunten. Weet je zeker dat je verder wilt gaan?", "Hint kopen", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                if (score >= 25)
+                {
+                    score -= 25;
+                    int tempPosition = rnd.Next(0, 4);
+                    string tempColor = colorSelectionString[colorsRandom[tempPosition]];
+                    MessageBox.Show($"De kleur {tempColor} komt voor in de code op positie {tempPosition +1}!", "Hint gekocht", MessageBoxButton.OK);
+                    scoreLabel.Content = $"Current score: {score}\nCurrent player: {userList[currentPlayer]}";
+                }
+                else
+                {
+                    MessageBox.Show("Je hebt niet genoeg scorepunten om een hint te kopen!", "Hint kopen", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
         }
     }
