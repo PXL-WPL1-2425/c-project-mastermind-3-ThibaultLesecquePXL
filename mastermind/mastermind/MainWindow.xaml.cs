@@ -23,6 +23,7 @@ namespace mastermind
 
         SolidColorBrush[] colorSelection = [Brushes.Red, Brushes.Blue, Brushes.Green, Brushes.White, Brushes.Yellow, Brushes.Orange];
         string[] colorSelectionString = ["Red", "Blue", "Green", "White", "Yellow", "Orange"];
+        string[] tooltipOptions = ["Foute kleur", "Juiste kleur, foute positie", "Juiste kleur, juiste positie"];
         int[] colorsRandom = new int[4];
         string[,] highscoresList = new string[15, 3];
         List<string> userList = new List<string>();
@@ -105,17 +106,20 @@ namespace mastermind
         {
             elipse.Stroke = Brushes.Black;
             elipse.StrokeThickness = 1;
+            elipse.ToolTip = tooltipOptions[0];
 
             if (combobox.SelectedIndex == colorsRandom[number])
             {
                 elipse.Stroke = Brushes.DarkRed;
                 elipse.StrokeThickness = 5;
+                elipse.ToolTip = tooltipOptions[2];
                 return true;
             }
             else if (colorsRandom.Contains(combobox.SelectedIndex))
             {
                 elipse.Stroke = Brushes.Wheat;
                 elipse.StrokeThickness = 5;
+                elipse.ToolTip = tooltipOptions[1];
                 score -= 1;
                 return false;
             }

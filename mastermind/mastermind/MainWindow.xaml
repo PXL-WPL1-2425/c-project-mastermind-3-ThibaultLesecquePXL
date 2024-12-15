@@ -29,10 +29,10 @@
             <ComboBox Name="color3ComboBox" HorizontalAlignment="Left" Margin="450,231,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="ComboBox_SelectionChanged"/>
             <ComboBox Name="color4ComboBox" HorizontalAlignment="Left" Margin="650,231,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="ComboBox_SelectionChanged"/>
             <Button Name="checkButton" Content="Check code" HorizontalAlignment="Center" Margin="0,340,0,0" VerticalAlignment="Top" Width="300" Height="50" FontSize="20" Click="CheckButton_Click"/>
-            <Ellipse Name="color1Ellipse" HorizontalAlignment="Left" Height="100" Margin="50,80,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
-            <Ellipse Name="color2Ellipse" HorizontalAlignment="Left" Height="100" Margin="250,80,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
-            <Ellipse Name="color3Ellipse" HorizontalAlignment="Left" Height="100" Margin="450,80,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
-            <Ellipse Name="color4Ellipse" HorizontalAlignment="Left" Height="100" Margin="650,80,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+            <Ellipse Name="color1Ellipse" HorizontalAlignment="Left" Height="100" Margin="50,80,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" ToolTip="Foute kleur"/>
+            <Ellipse Name="color2Ellipse" HorizontalAlignment="Left" Height="100" Margin="250,80,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" ToolTip="Foute kleur"/>
+            <Ellipse Name="color3Ellipse" HorizontalAlignment="Left" Height="100" Margin="450,80,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" ToolTip="Foute kleur"/>
+            <Ellipse Name="color4Ellipse" HorizontalAlignment="Left" Height="100" Margin="650,80,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" ToolTip="Foute kleur"/>
             <TextBox Name="debugTextBox" HorizontalAlignment="Center" Margin="0,285,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300" Height="50" Visibility="hidden"/>
             <Label Name="timerLabel" Content="00" HorizontalAlignment="Center" Margin="0,33,0,0" VerticalAlignment="Top" FontSize="25"/>
             <Label Name="scoreLabel" Content="Current score: 100" HorizontalAlignment="Left" Margin="50,15,0,0" VerticalAlignment="Top"/>
