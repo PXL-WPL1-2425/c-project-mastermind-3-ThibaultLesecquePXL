@@ -21,7 +21,7 @@
         <Grid Name="usernameUIGrid" Visibility="Visible">
             <TextBox Name="usernameTextBox" HorizontalAlignment="Center" Margin="0,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300" Height="40"/>
             <Label Content="Choose name" HorizontalAlignment="Center" Margin="0,130,0,0" VerticalAlignment="Top"/>
-            <Button Name="continueButton" Content="Add player" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Height="20" Width="192" Click="ContinueButton_Click"/>
+            <Button Name="continueButton" Content="Add player" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Height="20" Width="192" Click="ContinueButton_Click" IsDefault="True"/>
         </Grid>
         <Grid Name="gameUIGrid" Visibility="Hidden">
             <ComboBox Name="color1ComboBox" HorizontalAlignment="Left" Margin="50,231,0,0" VerticalAlignment="Top" Width="100" SelectionChanged="ComboBox_SelectionChanged"/>

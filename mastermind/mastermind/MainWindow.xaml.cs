@@ -30,8 +30,8 @@ namespace mastermind
         int attempts = 0;
         int maxattempts = 10;
         int score = 100;
+        int currentPlayer = 0;
         bool isPlaying = false;
-        string username = "";
 
         DispatcherTimer timer = new DispatcherTimer();
         DateTime startTime;
@@ -91,7 +91,7 @@ namespace mastermind
                 bool check4 = CheckComboBox(color4Ellipse, color4ComboBox, 3);
                 UpdateAttempts();
                 StartCountdown();
-                scoreLabel.Content = $"Current score: {score}";
+                
 
                 if (check1 && check2 && check3 && check4)
                 {
@@ -130,6 +130,7 @@ namespace mastermind
         {
             attempts += 1;
             this.Title = $"Poging {attempts}";
+            scoreLabel.Content = $"Current score: {score}\nCurrent player: {userList[currentPlayer]}";
 
             if (attempts >= maxattempts)
             {
@@ -225,7 +226,7 @@ namespace mastermind
             StartCountdown();
 
             score = 100;
-            scoreLabel.Content = $"Current score: {score}";
+            scoreLabel.Content = $"Current score: {score}\nCurrent player: {userList[currentPlayer]}";
         }
 
         private void EndGame(bool hasWon)
@@ -235,24 +236,49 @@ namespace mastermind
 
             if (hasWon)
             {
-                MessageBoxResult Result = MessageBox.Show($"Code is gekraakt in {attempts} pogingen.", "WINNER", MessageBoxButton.OK);
                 for (int i = 0; i < highscoresList.GetLength(0); i++)
                 {
-                    if (highscoresList[i, 0] == null) 
+                    if (highscoresList[i, 0] == null)
                     {
-                        highscoresList[i, 0] = username;
+                        highscoresList[i, 0] = userList[currentPlayer];
                         highscoresList[i, 1] = attempts.ToString();
                         highscoresList[i, 2] = score.ToString();
                         break;
                     }
                 }
+            }
+
+            if (currentPlayer < (userList.Count - 1))
+            {
+                if (hasWon)
+                {
+                    MessageBoxResult Result = MessageBox.Show($"Code is gekraakt in {attempts} pogingen.\nNu is speler {userList[currentPlayer+1]} aan de beurt.", userList[currentPlayer], MessageBoxButton.OK);
+                }
+                else
+                {
+                    MessageBoxResult Result = MessageBox.Show($"You failed! De correcte code was {colorSelectionString[colorsRandom[0]]}, {colorSelectionString[colorsRandom[1]]}, {colorSelectionString[colorsRandom[2]]}, {colorSelectionString[colorsRandom[3]]}.\nNu is speler {userList[currentPlayer+1]} aan de beurt.", userList[currentPlayer], MessageBoxButton.OK);
+                }
+                currentPlayer++;
+                NewGame();
+            }
+            else
+            {
+                if (hasWon)
+                {
+                    MessageBoxResult Result = MessageBox.Show($"Code is gekraakt in {attempts} pogingen.", userList[currentPlayer], MessageBoxButton.OK);
+                }
+                else
+                {
+                    MessageBoxResult Result = MessageBox.Show($"You failed! De correcte code was {colorSelectionString[colorsRandom[0]]}, {colorSelectionString[colorsRandom[1]]}, {colorSelectionString[colorsRandom[2]]}, {colorSelectionString[colorsRandom[3]]}.", userList[currentPlayer], MessageBoxButton.OK);
+                }
+
+                MessageBox.Show("Alle spelers zijn aan de beurt geweest!", "Mastermind", MessageBoxButton.OK);
                 gameUIGrid.Visibility = Visibility.Hidden;
                 usernameUIGrid.Visibility = Visibility.Visible;
+                this.Title = "Mastermind";
+                userList.Clear();
             }
-            else if (!hasWon)
-            {
-                MessageBoxResult Result = MessageBox.Show($"You failed! De correcte code was {colorSelectionString[colorsRandom[0]]}, {colorSelectionString[colorsRandom[1]]}, {colorSelectionString[colorsRandom[2]]}, {colorSelectionString[colorsRandom[3]]}.", "FAILED", MessageBoxButton.OK);
-            }
+
         }
 
         private void Mastermind_Close(object sender, System.ComponentModel.CancelEventArgs e)
@@ -274,6 +300,8 @@ namespace mastermind
             settingsUIGrid.Visibility = Visibility.Hidden;
             gameUIGrid.Visibility = Visibility.Hidden;
             usernameUIGrid.Visibility = Visibility.Visible;
+            this.Title = "Mastermind";
+            userList.Clear();
         }
 
         private void MnuHighscores_Click(object sender, System.EventArgs e)
@@ -313,13 +341,13 @@ namespace mastermind
             string tempUsername = usernameTextBox.Text;
             if (tempUsername.Length > 0)
             {
-                username = usernameTextBox.Text;
                 userList.Add(tempUsername);
                 MessageBoxResult result = MessageBox.Show($"Speler werd toegevoegd, wil je nog een speler toevoegen?", "Extra spelers toevoegen?", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.No)
                 {
                     usernameUIGrid.Visibility = Visibility.Hidden;
                     gameUIGrid.Visibility = Visibility.Visible;
+                    currentPlayer = 0;
                     ComboBoxItemsInit();
                     NewGame();
                 }
